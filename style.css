@@ -88,6 +88,17 @@ font-family: 'Chakra Petch', sans-serif;
     width: fit-content;
     box-shadow: 0px 0px 10px rgba(200, 200, 200, 0.8);
 }
+@media (max-height: 355px){
+    .menu, .menuItem {
+        font-size: 12px;
+    }
+    .menuItem:first-child {
+        min-width: 150px;
+    }
+    h2 {
+        font-size: 14px;
+    }
+}
 
 .menuItemTitle {
     margin-bottom: 10px;
