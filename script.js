@@ -46,19 +46,27 @@ function startRace() {
             lapResults.push(getRacerSped(raceCompetitors[racer]));
         }
         console.log(lapResults);
-        //view: https://dev.to/will_devs/javascript-how-to-check-if-an-array-has-duplicate-values-cha
-        //and: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
-        //for details on Set
-        if (new Set(lapResults).size !== lapResults.length){
-            i--;
-            console.log('houve um empate');
-        }else{
-            const maxSpeed = Math.max(...lapResults);
-            console.log(maxSpeed);
-            lapWinners.push(lapResults.indexOf(maxSpeed));
-        }
+
+        const maxSpeed = Math.max(...lapResults);
+        console.log(maxSpeed);
+        lapWinners.push(lapResults.indexOf(maxSpeed));
+
     }
     console.log(lapWinners);
+    console.log(getWinner(lapWinners, playersCount));
+    while(getWinner(lapWinners, playersCount) === 'draw'){
+        
+        
+        let lapResults = [];
+        for (let racer = 0; racer < playersCount; racer++){
+            lapResults.push(getRacerSped(raceCompetitors[racer]));
+        }
+
+        const maxSpeed = Math.max(...lapResults);
+        lapWinners.push(lapResults.indexOf(maxSpeed));
+    
+        
+    }
     console.log(getWinner(lapWinners, playersCount));
 }
 
@@ -70,7 +78,7 @@ function getRacerSped(racer) {
 }
 
 function getWinner(valueArray, numberOfPlayers) {
-    let winsPerPlayer =[0, 0, 0, 0, 0, 0];
+    let winsPerPlayer = new Array(numberOfPlayers).fill(0); //creates an array filed with zeroes for the desired lenght: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill
     console.log(`receby a array ${valueArray} e a quantidade ${numberOfPlayers}`);
     for(let a = 0; a < numberOfPlayers; a++){
         for(let b = 0; b < valueArray.length; b++){
@@ -79,5 +87,13 @@ function getWinner(valueArray, numberOfPlayers) {
             }
         }
     }
-    return(winsPerPlayer);
+    
+    //view: https://dev.to/will_devs/javascript-how-to-check-if-an-array-has-duplicate-values-cha
+    //and: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set
+    //for details on Set
+    if (new Set(winsPerPlayer).size !== winsPerPlayer.length){
+        return('draw');
+    }else{
+        return(winsPerPlayer);
+    }
 }
