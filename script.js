@@ -33,6 +33,7 @@ const buttonStartRace = document.getElementById('startButton');
 // LISTENERS
 buttonStartRace.addEventListener('click', startRace);
 buttonChangeRaceMode.addEventListener('click', changeRaceMode)
+buttonAddNewPlayer.addEventListener('click', createKart);
 
 
 // FUNCTIONS
@@ -121,4 +122,21 @@ function changeRaceMode(){
     chosenRaceMode = gameTypeOptions[currentOption];
     console.log(chosenRaceMode);
     raceModeDisplay.innerHTML = chosenRaceMode.name;
+}
+
+function createKart (){
+    const newkart = new kart();
+    newkart.driver = textFieldNewPlayerName.value;
+    newkart.speedMin = 100 + Math.floor(Math.random() * (150 - 100));
+    newkart.speedMax = 200 + Math.floor(Math.random() * (280 - 200));
+    newkart.skid = 0.01 + (Math.floor(Math.random() * (8 - 1))/100);
+    console.log(newkart);
+    if(raceCompetitors.length < 6){
+        document.getElementById(`player${raceCompetitors.length + 1}`).innerHTML = newkart.driver;
+        raceCompetitors.push(newkart);
+        console.log(raceCompetitors);
+    }else{
+        textFieldNewPlayerName.value = 'não dá mais!';
+    }
+
 }
