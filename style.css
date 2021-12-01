@@ -112,7 +112,7 @@ font-family: 'Chakra Petch', sans-serif;
 
 /* PLAYERS MENU */
 #playersList {
-    height: 80px;
+    height: 85px;
     width: max-content;
     display: flex;
     flex-direction: column;
