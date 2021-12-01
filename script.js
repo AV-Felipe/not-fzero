@@ -133,6 +133,7 @@ function createKart (){
     console.log(newkart);
     if(raceCompetitors.length < 6){
         document.getElementById(`player${raceCompetitors.length + 1}`).innerHTML = newkart.driver;
+        document.getElementById(`player${raceCompetitors.length + 1}`).classList.remove('unsetPlayer')
         raceCompetitors.push(newkart);
         console.log(raceCompetitors);
     }else{
