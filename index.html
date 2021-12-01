@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="pt">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>The Race</title>
+
+        <!--FONTS-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Orbitron:wght@500&family=Play:wght@400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" charset="UTF-8" defer></script>
+    </head>
+
+    <body>
+        <header>
+            <p id="winnerResult">FELIPE</p>
+        </header>
+        <main id="gameScreen">
+            
+            <ul id="menu">
+
+                <li class="menuItem">
+                    <h2 class="menuItemTitle">
+                        Players:
+                    </h2>
+
+                    <ul id="playersList">
+                        <li class="menuItemTopic">pedro</li>
+                        <li class="menuItemTopic">edna</li>
+                        <li class="menuItemTopic">juca</li>
+                        <li id="player4" class="menuItemTopic unsetPlayer">join</li>
+                        <li id="player5" class="menuItemTopic unsetPlayer">join</li>
+                        <li id="player6" class="menuItemTopic unsetPlayer">join</li>
+                    </ul>
+                    
+                </li>
+
+                <li class="menuItem">
+                    <h2 class="menuItemTitle">
+                        Novo Jogador:
+                    </h2>
+                    <label for="newPlayerName" class="menuItemTopic">Nome:</label>
+                    <input
+                        type="text"
+                        id="newPlayerName"
+                        maxlength="5"
+                        placeholder="digite um nome"
+                    />
+                    <button type="button" class="menuButton" id="addPlayerButton">Join</button>
+                </li>
+
+                <li class="menuItem">
+                    <h2 class="menuItemTitle">
+                        Modo de Jogo:
+                    </h2>
+                    <p id="raceMode" class="menuItemTopic">corrida rápida</p>
+                
+                    <button type="button" class="menuButton" id="changeModeButton">&lt-&gt</button>
+                </li>
+
+                <li class="menuItem">
+                    <h2 class="menuItemTitle">
+                        Iniciar
+                    </h2>
+                
+                    <button type="button" class="menuButton" id="startButton">GO!</button>
+                </li>
+
+            </ul>
+
+        </main>
+    </body>
+</html>
