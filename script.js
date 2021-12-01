@@ -32,12 +32,12 @@ const buttonStartRace = document.getElementById('startButton');
 
 // LISTENERS
 buttonStartRace.addEventListener('click', startRace);
+buttonChangeRaceMode.addEventListener('click', changeRaceMode)
 
 
+// FUNCTIONS
 function startRace() {
     let laps = chosenRaceMode.laps;
-    //let laps = 1;
-    //console.log(laps);
     let lapWinners = [];
     let playersCount = raceCompetitors.length;
     for (let i = 0; i < laps; i++){
@@ -68,6 +68,16 @@ function startRace() {
         
     }
     console.log(getWinner(lapWinners, playersCount));
+
+    let playersResults = getWinner(lapWinners, playersCount);
+    
+    const winner = Math.max(...playersResults);
+    console.log(winner);
+    console.log(playersResults.indexOf(winner));
+    const winnerIndex = playersResults.indexOf(winner);
+    console.log(raceCompetitors[winnerIndex]);
+
+    winnerNameDisplay.innerHTML = raceCompetitors[winnerIndex].driver;    
 }
 
 function getRacerSped(racer) {
@@ -96,4 +106,19 @@ function getWinner(valueArray, numberOfPlayers) {
     }else{
         return(winsPerPlayer);
     }
+}
+
+
+function changeRaceMode(){
+    let availableModes = gameTypeOptions.length;
+    console.log(gameTypeOptions.indexOf(chosenRaceMode));
+    let currentOption = gameTypeOptions.indexOf(chosenRaceMode);
+    if((currentOption + 1) < availableModes){
+        currentOption++;
+    }else{
+        currentOption = 0;
+    }
+    chosenRaceMode = gameTypeOptions[currentOption];
+    console.log(chosenRaceMode);
+    raceModeDisplay.innerHTML = chosenRaceMode.name;
 }
