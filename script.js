@@ -1,4 +1,6 @@
-// CLASSES
+// !!! The draw logic is very poor, we should only check for draws in the first, second and third place
+
+// OBJECT CONSTRUCTOR
 
 function newCar (driverName) {
     
