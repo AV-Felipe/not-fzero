@@ -1,17 +1,57 @@
 // CLASSES
-class kart {
-    constructor (driver, speedMax, speedMin, skid) {
-        this.driver = driver;
-        this.speedMax = speedMax;
-        this.speedMin = speedMin;
-        this.skid = skid;
+
+function newCar (driverName) {
+    
+    let carKind = pickKind();
+    let driver = driverName;
+    let maxSpeed;
+    let minSpeed;
+    let skid;
+    
+    function pickKind() {
+        let random = Math.random();
+        if(random <= 0.6){
+            return('popular');
+        }else if(0.6 < random && random <=0.95 ){
+            return('sport');
+        }else{
+            return('super sport');
+        }
+    };
+    
+    function setValue(min, max, type = 'speed') {
+        if(type == 'skid'){
+            return((Math.round((Math.random() * (4 - 3))*100) / 100) + min);
+        }else{
+            return(Math.floor(Math.random() * (max - min)) + min);
+        }
+        
     }
+
+    switch(carKind) {
+        case 'popular':
+            maxSpeed = setValue(180, 200);
+            minSpeed = setValue(110, 130);
+            skid = setValue(3, 4, 'skid');
+        
+        case 'sport':
+            maxSpeed = setValue(195, 215);
+            minSpeed = setValue(125, 145);
+            skid = setValue(2, 3, 'skid');
+        
+        case 'sport':
+            maxSpeed = setValue(210, 230);
+            minSpeed = setValue(140, 160);
+            skid = setValue(1, 1.75, 'skid');
+    }
+
+    return({driver, carKind, maxSpeed, minSpeed, skid});
 }
+
 
 // MOCK DB
 const raceCompetitors = [
-    {driver: 'pedro', speedMax: 230, speedMin: 150, skid: 0.03}, {driver: 'edna', speedMax: 220, speedMin: 180, skid: 0.01},
-    {driver: 'juca', speedMax: 260, speedMin: 120, skid: 0.05} 
+    newCar('pedro'), newCar('juca'), newCar('edna')
 ];
 
 const gameTypeOptions = [
@@ -29,6 +69,7 @@ const buttonAddNewPlayer = document.getElementById('addPlayerButton');
 const raceModeDisplay = document.getElementById('raceMode');
 const buttonChangeRaceMode = document.getElementById('changeModeButton');
 const buttonStartRace = document.getElementById('startButton');
+const numberOfLapsDisplay = document.getElementById('lapsRun');
 
 // LISTENERS
 buttonStartRace.addEventListener('click', startRace);
@@ -37,24 +78,31 @@ buttonAddNewPlayer.addEventListener('click', createKart);
 
 
 // FUNCTIONS
+
 function startRace() {
     let laps = chosenRaceMode.laps;
     let lapWinners = [];
     let playersCount = raceCompetitors.length;
+    
+    // generates the winner for each lap
     for (let i = 0; i < laps; i++){
+        
         let lapResults = [];
         for (let racer = 0; racer < playersCount; racer++){
             lapResults.push(getRacerSped(raceCompetitors[racer]));
         }
-        console.log(lapResults);
+        //console.log(lapResults);
 
         const maxSpeed = Math.max(...lapResults);
-        console.log(maxSpeed);
+        //console.log(maxSpeed);
         lapWinners.push(lapResults.indexOf(maxSpeed));
 
     }
+
     console.log(lapWinners);
     console.log(getWinner(lapWinners, playersCount));
+
+    //run aditional laps in case of competitors draw
     while(getWinner(lapWinners, playersCount) === 'draw'){
         
         
@@ -68,29 +116,35 @@ function startRace() {
     
         
     }
-    console.log(getWinner(lapWinners, playersCount));
+    //console.log(getWinner(lapWinners, playersCount));
 
     let playersResults = getWinner(lapWinners, playersCount);
     
     const winner = Math.max(...playersResults);
-    console.log(winner);
-    console.log(playersResults.indexOf(winner));
+    //console.log(winner);
+    //console.log(playersResults.indexOf(winner));
     const winnerIndex = playersResults.indexOf(winner);
-    console.log(raceCompetitors[winnerIndex]);
+    //console.log(raceCompetitors[winnerIndex]);
 
-    winnerNameDisplay.innerHTML = raceCompetitors[winnerIndex].driver;    
+    winnerNameDisplay.innerHTML = raceCompetitors[winnerIndex].driver;
+    numberOfLapsDisplay.innerHTML = String(lapWinners.length); 
 }
 
+// Calculates the car speed (used for each lap)
 function getRacerSped(racer) {
-    let speedRange = racer.speedMax - racer.speedMin;
-    let baseSpeed = Math.floor(Math.random()*speedRange) + racer.speedMin;
-    let currentSpeed = baseSpeed - (racer.skid * baseSpeed);
+    let speedRange = racer.maxSpeed - racer.minSpeed;
+    let baseSpeed = Math.floor(Math.random()*speedRange) + racer.minSpeed;
+    let currentSpeed = baseSpeed - ((racer.skid / 100) * baseSpeed);
     return (currentSpeed);
 }
 
+// Check for race winner
 function getWinner(valueArray, numberOfPlayers) {
+    //creates an array where each element index stands for a racer and its value the number of times he as won
     let winsPerPlayer = new Array(numberOfPlayers).fill(0); //creates an array filed with zeroes for the desired lenght: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fill
-    console.log(`receby a array ${valueArray} e a quantidade ${numberOfPlayers}`);
+    //console.log(`recebi a array ${valueArray} e a quantidade ${numberOfPlayers}`);
+    
+    //counts, for each racer, the number of laps he has won
     for(let a = 0; a < numberOfPlayers; a++){
         for(let b = 0; b < valueArray.length; b++){
             if (valueArray[b] === a){
