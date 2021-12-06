@@ -23,28 +23,31 @@ function newCar (driverName) {
     
     function setValue(min, max, type = 'speed') {
         if(type == 'skid'){
-            return((Math.round((Math.random() * (4 - 3))*100) / 100) + min);
+            return((Math.round((Math.random() * (max - min))*100) / 100) + min);
         }else{
             return(Math.floor(Math.random() * (max - min)) + min);
         }
         
     }
-
+    debugger;
     switch(carKind) {
         case 'popular':
             maxSpeed = setValue(180, 200);
             minSpeed = setValue(110, 130);
             skid = setValue(3, 4, 'skid');
+            break;
         
         case 'sport':
             maxSpeed = setValue(195, 215);
             minSpeed = setValue(125, 145);
             skid = setValue(2, 3, 'skid');
+            break;
         
-        case 'sport':
+        case 'super sport':
             maxSpeed = setValue(210, 230);
             minSpeed = setValue(140, 160);
             skid = setValue(1, 1.75, 'skid');
+            break;
     }
 
     return({driver, carKind, maxSpeed, minSpeed, skid});
