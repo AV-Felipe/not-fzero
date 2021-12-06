@@ -6,18 +6,18 @@ function newCar (driverName) {
     
     let carKind = pickKind();
     let driver = driverName;
-    let maxSpeed;
-    let minSpeed;
-    let skid;
+    let maxSpeed = setValue(cartTypes[carKind]['maximumSpeed']['minimum'], cartTypes[carKind]['maximumSpeed']['maximum']);
+    let minSpeed = setValue(cartTypes[carKind]['minimumSpeed']['minimum'], cartTypes[carKind]['minimumSpeed']['maximum']);
+    let skid = setValue(cartTypes[carKind]['skid']['minimum'], cartTypes[carKind]['skid']['maximum'], 'skid');
     
     function pickKind() {
         let random = Math.random();
         if(random <= 0.6){
-            return('popular');
+            return(Object.getOwnPropertyNames(cartTypes)[0]);
         }else if(0.6 < random && random <=0.95 ){
-            return('sport');
+            return(Object.getOwnPropertyNames(cartTypes)[1]);
         }else{
-            return('super sport');
+            return(Object.getOwnPropertyNames(cartTypes)[2]);
         }
     };
     
@@ -29,29 +29,31 @@ function newCar (driverName) {
         }
         
     }
-    debugger;
-    switch(carKind) {
-        case 'popular':
-            maxSpeed = setValue(180, 200);
-            minSpeed = setValue(110, 130);
-            skid = setValue(3, 4, 'skid');
-            break;
-        
-        case 'sport':
-            maxSpeed = setValue(195, 215);
-            minSpeed = setValue(125, 145);
-            skid = setValue(2, 3, 'skid');
-            break;
-        
-        case 'super sport':
-            maxSpeed = setValue(210, 230);
-            minSpeed = setValue(140, 160);
-            skid = setValue(1, 1.75, 'skid');
-            break;
-    }
 
     return({driver, carKind, maxSpeed, minSpeed, skid});
 }
+
+// CONSTANT OBJECTS
+const cartTypes = {
+    
+    popular: {
+        maximumSpeed: {minimum: 180, maximum: 200},
+        minimumSpeed: {minimum: 110, maximum: 130},
+        skid: {minimum: 3, maximum: 4}
+    },
+
+    sport: {
+        maximumSpeed: {minimum: 195, maximum: 215},
+        minimumSpeed: {minimum: 125, maximum: 145},
+        skid: {minimum: 2, maximum: 3}
+    },
+
+    superSport: {
+        maximumSpeed: {minimum: 210, maximum: 230},
+        minimumSpeed: {minimum: 140, maximum: 160},
+        skid: {minimum: 1, maximum: 1.75}
+    },
+};
 
 
 // MOCK DB
