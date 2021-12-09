@@ -28,10 +28,10 @@ function newCar (driverName) {
             return(Math.floor(Math.random() * (max - min)) + min);
         }
         
-    }
+    };
 
     return({driver, carKind, maxSpeed, minSpeed, skid});
-}
+};
 
 // CONSTANT OBJECTS
 const cartTypes = {
@@ -135,7 +135,7 @@ function startRace() {
 
     winnerNameDisplay.innerHTML = raceCompetitors[winnerIndex].driver;
     numberOfLapsDisplay.innerHTML = String(lapWinners.length); 
-}
+};
 
 // Calculates the car speed (used for each lap)
 function getRacerSped(racer) {
@@ -143,7 +143,7 @@ function getRacerSped(racer) {
     let baseSpeed = Math.floor(Math.random()*speedRange) + racer.minSpeed;
     let currentSpeed = baseSpeed - ((racer.skid / 100) * baseSpeed);
     return (currentSpeed);
-}
+};
 
 // Check for race winner
 function getWinner(valueArray, numberOfPlayers) {
@@ -168,7 +168,7 @@ function getWinner(valueArray, numberOfPlayers) {
     }else{
         return(winsPerPlayer);
     }
-}
+};
 
 
 function changeRaceMode(){
@@ -183,7 +183,7 @@ function changeRaceMode(){
     chosenRaceMode = gameTypeOptions[currentOption];
     console.log(chosenRaceMode);
     raceModeDisplay.innerHTML = chosenRaceMode.name;
-}
+};
 
 // generates new car for new competitors
 function createKart (){
@@ -199,4 +199,4 @@ function createKart (){
         textFieldNewPlayerName.value = 'não dá mais!';
     }
 
-}
+};
