@@ -1,42 +1,16 @@
-Os amigos Pedro e Juca não se conformaram, pois o carrinho da Edna ganhava a maioria das corridas no joguinho que desenvolveram,
-então eles tiveram uma ideia para resolver este problema: gerar os carrinhos de forma aleatória. 
+Os amigos Pedro, Juca e Edna continuam trabalhando em seu joguinho de corrida e dessa vez eles resolveram incluir uma função de evolução dos carrinhos. 
 
-Então elaboraram as seguintes regras: 
+Distribuição de pontos de experiência por corrida: 
+     a. Primeiro Lugar: 200 pontos; 
+     b. Segundo Lugar: 120 pontos; 
+     c. Terceiro Lugar: 50 pontos; 
 
-Cada carrinho gerado pode ser de uma das 3 raridades abaixo: 
+Para que um carrinho passe de nível, são necessários 450 pontos. 
 
-a. Popular: 60% de chances; 
-b. Sport: 35% de chances; 
-c. Super Sport: 5% de chances; 
+Cada vez que um carrinho passar de nível, adicione 1% da pontuação atual às velocidades Mínima e Máxima. O maior nível possível é 10. 
 
-Cada carrinho possui 3 atributos: 
+Ex.: Velocidade mínima de 150 + 1% = 151,5. 
 
-a. Velocidade máxima; 
-• Popular: Min.: 180 km/h | Máx.: 200 km/h 
-• Sport: Min.: 195 km/h | Máx.: 215 km/h 
-• Super Sport: Min.: 210 km/h | Máx.: 230 km/h 
+Para a atualização do joguinho, os carrinhos de cada jogador devem ser armazenados em um vetor de objetos. 
 
-b. Velocidade mínima; 
-• Popular: Min.: 110 km/h | Máx.: 130 km/h 
-• Sport: Min.: 125 km/h | Máx.: 145 km/h 
-• Super Sport: Min.: 140 km/h | Máx.: 160 km/h 
-
-c. Derrapagem (%); 
-• Popular: Min.: 3% | Máx.: 4% 
-• Sport: Min.: 2% | Máx.: 3% 
-• Super Sport: Min.: 1%| Máx.: 1.75% 
-
-Os carrinhos de Pedro, Juca e Edna devem ser gerados de forma aleatória e respeitando as regras de montagem acima citadas. 
-
-O vencedor da corrida é determinado pelo carrinho que terminar mais vezes em primeiro lugar
-
-A fórmula para determinar quem ganhou cada volta é a seguinte: 
-Sortear, utilizando o Math.random(), um número entre a Velocidade mínima e a Velocidade máxima, em seguida deve-se subtrair o percentual de derrapagem. O carro com o maior valor vence a volta. 
-
-Regras: 
-
-a. O jogo possui 3 modos de corrida previamente programadas: Corrida rápida (10 voltas), Grande Prêmio (70 voltas) e Enduro (160 voltas). 
-b. Utilizar objetos para o armazenamento dos dados dos carros. 
-
-Desafio opcional: Permitir que cada jogador crie até 5 carros e possa escolher qual carro participará daquela corrida. 
-Desafio opcional 2: Determinar através de um formulário, o número de voltas da corrida.
+Adicione um botão para evoluir os carrinhos para cada jogador. O botão deve percorrer os carrinhos daquele jogador utilizando o método forEach() e executar as ações de atualização necessárias.
