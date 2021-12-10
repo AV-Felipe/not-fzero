@@ -150,6 +150,7 @@ function startRace() {
     console.log(racePodium);
     
     giveXp(racePodium);
+    changeCar();
 
     //const winner = Math.max(...playersResults);
     //console.log(winner);
@@ -166,7 +167,7 @@ function getRacerSped(racer) {
     let speedRange = racer.maxSpeed - racer.minSpeed;
     let baseSpeed = Math.floor(Math.random()*speedRange) + racer.minSpeed;
     let currentSpeed = baseSpeed - ((racer.skid / 100) * baseSpeed);
-    debugger;
+    //debugger;
     if(racer.level > 0){
         currentSpeed += currentSpeed * (racer.level / 100);
     }
@@ -245,4 +246,15 @@ function giveXp(podium) {
             }
         }
     });
+};
+
+function changeCar() {
+    raceCompetitors.forEach(player => {
+        const nextCar = newCar();
+        player.carKind = nextCar.carKind;
+        player.maxSpeed = nextCar.maxSpeed;
+        player.minSpeed = nextCar.minSpeed;
+        player.skid = nextCar.skid;
+    })
+    console.log(raceCompetitors);
 }
