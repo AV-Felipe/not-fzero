@@ -19,3 +19,5 @@ Adicione um botão para evoluir os carrinhos para cada jogador. O botão deve pe
 orientações em aula:
   a experiência e o nível é do corredor. Os pontos de experiência do jogador serão aplicados sobre o carro utilizado na corrida em questão (deveremos ter um novo
   carrinho sorteado para cada modo de corrida).
+  O bônus de velocidade deve ser aplicado sobre a velocidade máxima e mínima da volta. (o enunciado do exercício foi alterado de forma drástica
+  pelas instruções da aula de 09/12/2021)

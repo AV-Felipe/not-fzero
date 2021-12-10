@@ -166,6 +166,10 @@ function getRacerSped(racer) {
     let speedRange = racer.maxSpeed - racer.minSpeed;
     let baseSpeed = Math.floor(Math.random()*speedRange) + racer.minSpeed;
     let currentSpeed = baseSpeed - ((racer.skid / 100) * baseSpeed);
+    debugger;
+    if(racer.level > 0){
+        currentSpeed += currentSpeed * (racer.level / 100);
+    }
     return (currentSpeed);
 };
 
