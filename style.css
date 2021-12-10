@@ -113,7 +113,7 @@ font-family: 'Chakra Petch', sans-serif;
 /* PLAYERS MENU */
 #playersList {
     height: 85px;
-    width: 250px;
+    width: max-content;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -123,6 +123,15 @@ font-family: 'Chakra Petch', sans-serif;
 
 .unsetPlayer {
     color: rgb(126, 126, 126);
+}
+
+#playersData {
+    width: 350px;
+    max-width: 500px;
+}
+
+.playerLevel {
+    font-size: 12px;
 }
 
 /* ADD PLAYER MENU */

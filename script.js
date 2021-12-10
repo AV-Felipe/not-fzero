@@ -221,7 +221,8 @@ function createKart (){
 
     if(raceCompetitors.length < 6){
         document.getElementById(`player${raceCompetitors.length + 1}`).innerHTML = newkart.driver;
-        document.getElementById(`player${raceCompetitors.length + 1}`).classList.remove('unsetPlayer')
+        document.getElementById(`player${raceCompetitors.length + 1}`).classList.remove('unsetPlayer');
+        document.getElementById(`player${raceCompetitors.length + 1}`).innerHTML += `<sup class="playerLevel">lv.0</sup>`;
         raceCompetitors.push(newkart);
         console.log(raceCompetitors);
     }else{
@@ -243,6 +244,8 @@ function giveXp(podium) {
             if(player.level < 10){
                 player.level++;
                 player.xp = player.xp - 450;
+                const levelDisplay = document.querySelectorAll('.playerLevel');
+                levelDisplay[raceCompetitors.indexOf(player)].innerHTML = `lv.${player.level}`;
             }
         }
     });
