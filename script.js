@@ -2,10 +2,10 @@
 
 // OBJECT CONSTRUCTOR
 
-function newCar (driverName) {
+function newCar () {
     
     let carKind = pickKind();
-    let driver = driverName;
+    
     let maxSpeed = setValue(cartTypes[carKind]['maximumSpeed']['minimum'], cartTypes[carKind]['maximumSpeed']['maximum']);
     let minSpeed = setValue(cartTypes[carKind]['minimumSpeed']['minimum'], cartTypes[carKind]['minimumSpeed']['maximum']);
     let skid = setValue(cartTypes[carKind]['skid']['minimum'], cartTypes[carKind]['skid']['maximum'], 'skid');
@@ -30,8 +30,21 @@ function newCar (driverName) {
         
     };
 
-    return({driver, carKind, maxSpeed, minSpeed, skid});
+    return({carKind, maxSpeed, minSpeed, skid});
 };
+
+function newPlayer (driverName){
+    const driver = driverName;
+    let level = 0;
+    let xp = 0;
+    let currentCar = newCar();
+    let carKind = currentCar.carKind;
+    let maxSpeed = currentCar.maxSpeed;
+    let minSpeed = currentCar.minSpeed;
+    let skid = currentCar.skid;
+    
+    return({driver, level, xp, carKind, maxSpeed, minSpeed, skid});
+}
 
 // CONSTANT OBJECTS
 const cartTypes = {
@@ -58,7 +71,7 @@ const cartTypes = {
 
 // MOCK DB
 const raceCompetitors = [
-    newCar('pedro'), newCar('juca'), newCar('edna')
+    newPlayer('pedro'), newPlayer('juca'), newPlayer('edna')
 ];
 
 const gameTypeOptions = [
@@ -125,15 +138,25 @@ function startRace() {
     }
     //console.log(getWinner(lapWinners, playersCount));
 
-    let playersResults = getWinner(lapWinners, playersCount);
+    let playersResults = getWinner(lapWinners, playersCount); //lista a quantidade de vitórias por player, na ordem dos players
+    let racePodium = []; //array para armazenar o índice do player que ficou em cada posição
     
-    const winner = Math.max(...playersResults);
+    debugger;
+    while(racePodium.length < 3) {
+        const winner = Math.max(...playersResults);
+        racePodium.push(playersResults.indexOf(winner));
+        playersResults[playersResults.indexOf(winner)] = -1;
+
+    };
+    console.log(racePodium);
+
+    //const winner = Math.max(...playersResults);
     //console.log(winner);
     //console.log(playersResults.indexOf(winner));
-    const winnerIndex = playersResults.indexOf(winner);
+    //const winnerIndex = playersResults.indexOf(winner);
     //console.log(raceCompetitors[winnerIndex]);
 
-    winnerNameDisplay.innerHTML = raceCompetitors[winnerIndex].driver;
+    winnerNameDisplay.innerHTML = raceCompetitors[racePodium[0]].driver;
     numberOfLapsDisplay.innerHTML = String(lapWinners.length); 
 };
 
@@ -166,7 +189,7 @@ function getWinner(valueArray, numberOfPlayers) {
     if (new Set(winsPerPlayer).size !== winsPerPlayer.length){
         return('draw');
     }else{
-        return(winsPerPlayer);
+        return(winsPerPlayer); //an array where the positions are the players and the value their lap winning count
     }
 };
 
@@ -187,7 +210,7 @@ function changeRaceMode(){
 
 // generates new car for new competitors
 function createKart (){
-    const newkart = newCar(textFieldNewPlayerName.value);
+    const newkart = newPlayer(textFieldNewPlayerName.value);
     //console.log(newkart);
 
     if(raceCompetitors.length < 6){

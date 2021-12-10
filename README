@@ -14,3 +14,8 @@ Ex.: Velocidade mínima de 150 + 1% = 151,5.
 Para a atualização do joguinho, os carrinhos de cada jogador devem ser armazenados em um vetor de objetos. 
 
 Adicione um botão para evoluir os carrinhos para cada jogador. O botão deve percorrer os carrinhos daquele jogador utilizando o método forEach() e executar as ações de atualização necessárias.
+
+
+orientações em aula:
+  a experiência e o nível é do corredor. Os pontos de experiência do jogador serão aplicados sobre o carro utilizado na corrida em questão (deveremos ter um novo
+  carrinho sorteado para cada modo de corrida).
