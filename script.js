@@ -233,7 +233,21 @@ function createKart (){
 
 function giveXp(podium) {
     let i = 0;
-    const givenXp = [200, 120, 50]
+    const currentRaceMode = chosenRaceMode.name;
+    
+    //changes the amount of xp, given the race mode, default is corrida rápida
+    let givenXp = [200, 120, 50];
+    
+    switch(currentRaceMode){
+        case 'corrida rápida':
+            break;
+        case 'grande prêmio':
+            givenXp = [220, 130, 75];
+            break;
+        case 'enduro':
+            givenXp = [250, 150, 90];
+            break;
+    };
 
     podium.forEach(place => {
         raceCompetitors[place].xp += givenXp[podium.indexOf(place)];
