@@ -68,7 +68,6 @@ const cartTypes = {
     },
 };
 
-
 // MOCK DB
 const raceCompetitors = [
     newPlayer('pedro'), newPlayer('juca'), newPlayer('edna')
@@ -141,7 +140,7 @@ function startRace() {
     let playersResults = getWinner(lapWinners, playersCount); //lista a quantidade de vitórias por player, na ordem dos players
     let racePodium = []; //array para armazenar o índice do player que ficou em cada posição
     
-    debugger;
+    //debugger;
     while(racePodium.length < 3) {
         const winner = Math.max(...playersResults);
         racePodium.push(playersResults.indexOf(winner));
@@ -149,6 +148,8 @@ function startRace() {
 
     };
     console.log(racePodium);
+    
+    giveXp(racePodium);
 
     //const winner = Math.max(...playersResults);
     //console.log(winner);
@@ -223,3 +224,21 @@ function createKart (){
     }
 
 };
+
+function giveXp(podium) {
+    let i = 0;
+    const givenXp = [200, 120, 50]
+
+    podium.forEach(place => {
+        raceCompetitors[place].xp += givenXp[podium.indexOf(place)];
+    });
+
+    raceCompetitors.forEach(player => {
+        if(player.xp >= 450) {
+            if(player.level < 10){
+                player.level++;
+                player.xp = player.xp - 450;
+            }
+        }
+    });
+}
